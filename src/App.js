@@ -1,13 +1,18 @@
 import React from 'react';
 import './App.css';
 // import * as api from './services/api';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Home from './pages/Home';
+import ShoppingCart from './pages/ShoppingCart';
 
 function App() {
   return (
-    <div data-testid="home-initial-message">
-      <input type="text" />
-      <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={ Home } />
+        <Route path="/cart" component={ ShoppingCart } />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
