@@ -46,8 +46,9 @@ class Home extends React.Component {
   }
 
   render() {
-    const { categorias, busca, resultadoAPI } = this.state;
-    // const { categorias, busca } = this.state;
+    const { categorias } = this.state;
+    // const { categorias, busca, resultadoAPI } = this.state;
+    const { busca, resultadoAPI } = this.state;
     return (
       <div data-testid="home-initial-message">
         <input
