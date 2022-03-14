@@ -10,7 +10,7 @@ class Home extends React.Component {
     this.activegetCategories = this.activegetCategories.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.onClickPesquisa = this.onClickPesquisa.bind(this);
-
+    this.productsCategorie = this.productsCategorie.bind(this);
     this.state = {
       categorias: [],
       busca: '',
@@ -35,7 +35,13 @@ class Home extends React.Component {
     this.setState({
       resultadoAPI: response.results,
     });
-    // console.log(response.results);
+  }
+
+  async productsCategorie({ target }) {
+    const response = await getProductsFromCategoryAndQuery(target.name);
+    this.setState({
+      resultadoAPI: response.results,
+    });
   }
 
   async activegetCategories() {
@@ -46,9 +52,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { categorias } = this.state;
-    // const { categorias, busca, resultadoAPI } = this.state;
-    const { busca, resultadoAPI } = this.state;
+    const { busca, resultadoAPI, categorias } = this.state;
     return (
       <div data-testid="home-initial-message">
         <input
@@ -73,12 +77,13 @@ class Home extends React.Component {
           categorias.map((categorie) => (
             <div key={ categorie.id }>
               <label
-                htmlFor="categoria"
+                htmlFor={ categorie.id }
               >
                 <input
                   type="radio"
                   data-testid="category"
-                  name="categoria"
+                  name={ categorie.id }
+                  onChange={ this.productsCategorie }
                 />
                 {' '}
                 { categorie.name }
