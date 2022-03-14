@@ -9,7 +9,7 @@ class Produtos extends React.Component {
         <div key={ i } data-testid="product">
           <p>{ produto.title }</p>
           <img src={ produto.thumbnail } alt="foto produto" />
-          <p key={ i }>{ produto.price }</p>
+          <p>{ produto.price }</p>
         </div>
       ))
     );
