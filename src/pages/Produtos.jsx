@@ -13,7 +13,7 @@ class Produtos extends React.Component {
     const requestResult = localStorage.getItem('product');
     const requestResultJSON = JSON.parse(requestResult);
     const validateJSON = requestResultJSON === null ? '' : requestResultJSON;
-    const result = listaProdutos.filter((e) => e.title === target.name);
+    const result = listaProdutos.filter((product) => product.title === target.name);
     const resultJSON = JSON.stringify([...validateJSON, result[0]]);
     localStorage.setItem('product', resultJSON);
   }
