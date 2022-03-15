@@ -26,7 +26,6 @@ class Detalhes extends React.Component {
 
   render() {
     const { produto: { title, price, thumbnail, attributes } } = this.state;
-    console.log(attributes);
     const result = attributes === undefined ? (<p>carregando</p>) : (attributes
       .map((attribute, id) => (
         <li key={ id }>{ `${attribute.name} - ${attribute.value_name}` }</li>)));
@@ -38,11 +37,9 @@ class Detalhes extends React.Component {
           { `${title} - R$${price}` }
         </h2>
         <img src={ thumbnail } alt={ title } />
-        {result}
-        {/* <ul>
-          { attributes === undefined ? null :
-          { attributes.map((attribute, id) => (<li key={ id }>{ attribute }</li>)) }}
-        </ul> */}
+        <ul>
+          {result}
+        </ul>
       </div>
     );
   }

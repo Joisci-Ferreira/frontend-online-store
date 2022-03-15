@@ -3,9 +3,23 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class Produtos extends React.Component {
+  constructor() {
+    super();
+    this.ClickButton = this.ClickButton.bind(this);
+  }
+
+  ClickButton({ target }) {
+    const { listaProdutos } = this.props;
+    const requestResult = localStorage.getItem('product');
+    const requestResultJSON = JSON.parse(requestResult);
+    const validateJSON = requestResultJSON === null ? '' : requestResultJSON;
+    const result = listaProdutos.filter((product) => product.title === target.name);
+    const resultJSON = JSON.stringify([...validateJSON, result[0]]);
+    localStorage.setItem('product', resultJSON);
+  }
+
   render() {
     const { listaProdutos } = this.props;
-    console.log(listaProdutos);
     return (
       listaProdutos.map((produto, i) => (
         <div key={ i } data-testid="product">
@@ -20,6 +34,14 @@ class Produtos extends React.Component {
               Ver detalhes
             </button>
           </Link>
+          <button
+            type="button"
+            data-testid="product-add-to-cart"
+            onClick={ this.ClickButton }
+            name={ produto.title }
+          >
+            Adicionar ao carrinho
+          </button>
         </div>
       ))
     );
