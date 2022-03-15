@@ -8,9 +8,14 @@ class Detalhes extends React.Component {
     this.state = {
       produto: {},
     };
+    this.activeGetProductsId = this.activeGetProductsId.bind(this);
   }
 
   async componentDidMount() {
+    this.activeGetProductsId();
+  }
+
+  async activeGetProductsId() {
     const { match: { params: { id } } } = this.props;
     const resultadoApi = await getProductsId(id);
     this.setState({
@@ -20,15 +25,24 @@ class Detalhes extends React.Component {
   }
 
   render() {
-    const { produto } = this.state;
+    const { produto: { title, price, thumbnail, attributes } } = this.state;
+    console.log(attributes);
+    const result = attributes === undefined ? (<p>carregando</p>) : (attributes
+      .map((attribute, id) => (
+        <li key={ id }>{ `${attribute.name} - ${attribute.value_name}` }</li>)));
     return (
       <div>
         <h2
           data-testid="product-detail-name"
         >
-          { `${produto.title} - R$${produto.price}` }
+          { `${title} - R$${price}` }
         </h2>
-        <img src={ produto.thumbnail } alt={ produto.title } />
+        <img src={ thumbnail } alt={ title } />
+        {result}
+        {/* <ul>
+          { attributes === undefined ? null :
+          { attributes.map((attribute, id) => (<li key={ id }>{ attribute }</li>)) }}
+        </ul> */}
       </div>
     );
   }
