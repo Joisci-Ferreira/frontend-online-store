@@ -25,6 +25,7 @@ class Detalhes extends React.Component {
 
   async componentDidMount() {
     this.activeGetProductsId();
+    console.log('deu');
   }
 
   async activeGetProductsId() {
